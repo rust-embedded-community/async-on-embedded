@@ -1,0 +1,44 @@
+[workspace]
+members = [
+  "async-cortex-m",
+  "cortex-m-udf",
+  "nrf52",
+  "panic-udf",
+]
+
+[profile.dev]
+codegen-units = 1
+debug = 1
+debug-assertions = true # !
+incremental = false
+lto = "fat"
+opt-level = 'z' # !
+overflow-checks = true # !
+
+[profile.release]
+codegen-units = 1
+debug = 1
+debug-assertions = false
+incremental = false
+lto = "fat"
+opt-level = 3
+overflow-checks = false
+
+# `syn` and other proc-macro crates take very long to build when optimized
+# this disables optimizations for them significantly reducing the time it takes
+# to build the whole dependency graph from scratch
+[profile.dev.build-override]
+codegen-units = 16
+debug = false
+debug-assertions = false
+incremental = true
+opt-level = 0
+overflow-checks = false
+
+[profile.release.build-override]
+codegen-units = 16
+debug = false
+debug-assertions = false
+incremental = true
+opt-level = 0
+overflow-checks = false

@@ -1,0 +1,14 @@
+[package]
+authors = ["Jorge Aparicio <jorge.aparicio@ferrous-systems.com>"]
+edition = "2018"
+license = "MIT OR Apache-2.0"
+name = "async-cortex-m"
+publish = false
+version = "0.0.0-alpha.0"
+
+[dependencies]
+cortex-m-udf = { path = "../cortex-m-udf" }
+generic-array = "0.13.2"
+heapless = { git = "https://github.com/japaric/heapless", branch = "slab" }
+pin-utils = "0.1.0-alpha.4"
+typenum = "1.11.2"
