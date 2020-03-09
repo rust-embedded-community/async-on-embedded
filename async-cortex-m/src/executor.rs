@@ -7,6 +7,7 @@ use core::{
     task::{Context, Poll, RawWaker, RawWakerVTable, Waker},
 };
 
+use cortex_m::asm;
 use heapless::Vec;
 use pin_utils::pin_mut;
 
@@ -107,13 +108,9 @@ impl Executor {
                 }
             }
 
-            // TODO try to sleep (WFI) here
-            // just calling WFI here will result in missed notifications because
-            // a `Waker` (called from an interrupt handler) may run just after
-            // we exit the `for` loop but before WFI is called. Then the system
-            // won't wake up until the *next* interrupt handler is triggered
-            // (which could end up never running if the applications used only a
-            // single interrupt)
+            // try to sleep; this will be a no-op if any of the previous tasks generated a SEV or an
+            // interrupt ran (regardless of whether it generated a wake-up or not)
+            asm::wfe();
         };
         self.in_block_on.set(false);
         val

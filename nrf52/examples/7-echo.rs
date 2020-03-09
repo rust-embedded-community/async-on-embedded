@@ -35,7 +35,7 @@ fn main() -> ! {
 
     let (mut tx, mut rx) = serial::take();
     task::block_on(async {
-        let mut buf = [0; 16];
+        let mut buf = [0; 1];
         loop {
             rx.read(&mut buf).await;
             tx.write(&buf).await;
