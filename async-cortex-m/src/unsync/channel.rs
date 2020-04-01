@@ -12,7 +12,6 @@ use core::{
     task::{Context, Poll},
 };
 
-use cortex_m::asm;
 use generic_array::{typenum::Unsigned, GenericArray};
 
 use super::waker_set::WakerSet;
@@ -137,7 +136,7 @@ impl<T> Channel<T> {
                 self.read.set(read.wrapping_add(1));
                 // notify a sender
                 self.send_wakers.notify_one();
-                asm::sev();
+                crate::signal_event_ready();
                 Some(val)
             } else {
                 // empty
@@ -162,7 +161,7 @@ impl<T> Channel<T> {
                 self.write.set(write.wrapping_add(1));
                 // notify a receiver
                 self.recv_wakers.notify_one();
-                asm::sev();
+                crate::signal_event_ready();
                 Ok(())
             } else {
                 // full

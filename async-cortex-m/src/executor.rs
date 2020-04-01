@@ -7,7 +7,6 @@ use core::{
     task::{Context, Poll, RawWaker, RawWakerVTable, Waker},
 };
 
-use cortex_m::asm;
 use heapless::Vec;
 use pin_utils::pin_mut;
 
@@ -120,7 +119,7 @@ impl Executor {
 
             // try to sleep; this will be a no-op if any of the previous tasks generated a SEV or an
             // interrupt ran (regardless of whether it generated a wake-up or not)
-            asm::wfe();
+            unsafe { crate::wait_for_event() };
         };
         self.in_block_on.set(false);
         val
