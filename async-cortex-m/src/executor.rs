@@ -32,7 +32,7 @@ static VTABLE: RawWakerVTable = {
         wake_by_ref(p)
     }
     unsafe fn wake_by_ref(p: *const ()) {
-        (*(p as *const AtomicBool)).store(true, Ordering::Relaxed)
+        (*(p as *const AtomicBool)).store(true, Ordering::Release)
     }
     unsafe fn drop(_: *const ()) {
         // no-op
@@ -66,9 +66,12 @@ impl Executor {
         let waker =
             unsafe { Waker::from_raw(RawWaker::new(&ready as *const _ as *const _, &VTABLE)) };
         let val = loop {
+            let mut task_woken = false;
+
             // advance the main task
-            if ready.load(Ordering::Relaxed) {
-                ready.store(false, Ordering::Relaxed);
+            if ready.load(Ordering::Acquire) {
+                task_woken = true;
+                ready.store(false, Ordering::Release);
 
                 let mut cx = Context::from_waker(&waker);
                 if let Poll::Ready(val) = f.as_mut().poll(&mut cx) {
@@ -87,9 +90,11 @@ impl Executor {
                 // interrupt handlers (the only source of 'race conditions' (!= data races)) are
                 // "oneshot": they'll issue a `wake` and then disable themselves to not run again
                 // until the woken task has made more work
-                if task.ready.load(Ordering::Relaxed) {
+                if task.ready.load(Ordering::Acquire) {
+                    task_woken = true;
+
                     // we are about to service the task so switch the `ready` flag to `false`
-                    task.ready.store(false, Ordering::Relaxed);
+                    task.ready.store(false, Ordering::Release);
 
                     // NOTE we never deallocate tasks so `&ready` is always pointing to
                     // allocated memory (`&'static AtomicBool`)
@@ -106,6 +111,11 @@ impl Executor {
                         continue;
                     }
                 }
+            }
+
+            if task_woken {
+                // If at least one task was woken up, do not sleep, try again
+                continue;
             }
 
             // try to sleep; this will be a no-op if any of the previous tasks generated a SEV or an
