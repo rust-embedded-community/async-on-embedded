@@ -94,7 +94,7 @@ impl<T> Drop for MutexGuard<'_, T> {
     fn drop(&mut self) {
         self.0.locked.set(false);
         self.0.wakers.notify_any();
-        asm::wfe();
+        asm::sev();
     }
 }
 
