@@ -24,6 +24,7 @@ dependencies = [
 name = "async-cortex-m"
 version = "0.0.0-alpha.0"
 dependencies = [
+ "cortex-m",
  "cortex-m-udf",
  "generic-array 0.13.2",
  "heapless 0.5.3 (git+https://github.com/japaric/heapless?branch=slab)",
