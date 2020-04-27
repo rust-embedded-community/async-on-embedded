@@ -17,7 +17,7 @@
 
 use core::time::Duration;
 
-use async_cortex_m::task;
+use async_embedded::task;
 use cortex_m_rt::entry;
 use nrf52::{led::Red, timer::Timer};
 use panic_udf as _; // panic handler

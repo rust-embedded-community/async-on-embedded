@@ -7,7 +7,7 @@
 
 use core::{cell::Cell, fmt::Write as _, time::Duration};
 
-use async_cortex_m::{task, unsync::Mutex};
+use async_embedded::{task, unsync::Mutex};
 use cortex_m_rt::entry;
 use heapless::{consts, String};
 use nrf52::{led::Red, scd30::Scd30, serial, timer::Timer, twim::Twim};

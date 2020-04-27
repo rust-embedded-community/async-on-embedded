@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "async-cortex-m"
+name = "async-embedded"
 version = "0.0.0-alpha.0"
 dependencies = [
  "cortex-m",
@@ -167,7 +167,7 @@ dependencies = [
 name = "nrf52"
 version = "0.0.0-alpha.0"
 dependencies = [
- "async-cortex-m",
+ "async-embedded",
  "chrono",
  "cortex-m",
  "cortex-m-rt",
