@@ -16,7 +16,7 @@ typenum = "1.11.2"
 cortex-m = "0.6.2"
 cortex-m-udf = { path = "../cortex-m-udf" }
 
-[target.'cfg(target_arch = "riscv32")'.dependencies]
+[target.'cfg(any(target_arch = "riscv32", target_arch = "riscv64"))'.dependencies]
 riscv = "0.5.6"
 
 [features]

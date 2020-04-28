@@ -33,7 +33,7 @@ pub(crate) unsafe fn wait_for_event() {
     asm::wfe();
 }
 
-#[cfg(target_arch = "riscv32")]
+#[cfg(any(target_arch = "riscv32", target_arch = "riscv64"))]
 /// This keeps dropping into the debugger and never returns
 pub fn abort() -> ! {
     loop {
@@ -41,19 +41,19 @@ pub fn abort() -> ! {
     }
 }
 
-#[cfg(all(target_arch = "riscv32", feature = "riscv-wait-nop"))]
+#[cfg(all(any(target_arch = "riscv32", target_arch = "riscv64"), feature = "riscv-wait-nop"))]
 #[inline]
 /// Prevent next `wait_for_interrupt` from sleeping, wake up other harts if needed.
 /// This particular implementation does nothing, since `wait_for_interrupt` never sleeps
 pub(crate) unsafe fn signal_event_ready() {}
 
-#[cfg(all(target_arch = "riscv32", feature = "riscv-wait-nop"))]
+#[cfg(all(any(target_arch = "riscv32", target_arch = "riscv64"), feature = "riscv-wait-nop"))]
 #[inline]
 /// Wait for an interrupt or until notified by other hart via `signal_task_ready`
 /// This particular implementation does nothing
 pub(crate) unsafe fn wait_for_event() {}
 
-#[cfg(all(target_arch = "riscv32", feature = "riscv-wait-extern"))]
+#[cfg(all(any(target_arch = "riscv32", target_arch = "riscv64"), feature = "riscv-wait-extern"))]
 extern "C" {
     /// Prevent next `wait_for_interrupt` from sleeping, wake up other harts if needed.
     /// User is expected to provide an actual implementation, like the one shown below.
@@ -74,10 +74,10 @@ extern "C" {
     pub(crate) fn wait_for_event();
 }
 
-#[cfg(all(target_arch = "riscv32", feature = "riscv-wait-wfi-single-hart"))]
+#[cfg(all(any(target_arch = "riscv32", target_arch = "riscv64"), feature = "riscv-wait-wfi-single-hart"))]
 static mut TASK_READY: bool = false;
 
-#[cfg(all(target_arch = "riscv32", feature = "riscv-wait-wfi-single-hart"))]
+#[cfg(all(any(target_arch = "riscv32", target_arch = "riscv64"), feature = "riscv-wait-wfi-single-hart"))]
 #[inline]
 /// Prevent next `wait_for_interrupt` from sleeping, wake up other harts if needed.
 /// This particular implementation prevents `wait_for_interrupt` from sleeping by setting
@@ -86,7 +86,7 @@ pub(crate) unsafe fn signal_event_ready() {
     TASK_READY = true;
 }
 
-#[cfg(all(target_arch = "riscv32", feature = "riscv-wait-wfi-single-hart"))]
+#[cfg(all(any(target_arch = "riscv32", target_arch = "riscv64"), feature = "riscv-wait-wfi-single-hart"))]
 #[inline]
 /// Wait for an interrupt or until notified by other hart via `signal_task_ready`
 /// This particular implementation decides whether to sleep or not by checking
