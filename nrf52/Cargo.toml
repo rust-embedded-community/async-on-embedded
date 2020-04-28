@@ -15,7 +15,7 @@ panic-semihosting = "0.5.3"
 panic-udf = { path = "../panic-udf" }
 
 [dependencies]
-async-embedded = { path = "../async-embedded", features = ["isa-cortex-m"] }
+async-embedded = { path = "../async-embedded" }
 cortex-m = "0.6.2"
 cortex-m-rt = "0.6.12"
 pac = { package = "nrf52840-pac", version = "0.9.0", features = ["rt"] }
