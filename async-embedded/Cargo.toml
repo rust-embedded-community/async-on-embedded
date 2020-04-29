@@ -23,4 +23,4 @@ riscv = "0.5.6"
 default = ["riscv-wait-nop"]
 riscv-wait-nop = []
 riscv-wait-wfi-single-hart = []
-wait-extern = []
+riscv-wait-extern = []
