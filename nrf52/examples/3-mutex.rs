@@ -13,9 +13,9 @@
 //! Expected output:
 //!
 //! ```
-//! B: before recv
-//! A: before send
-//! A: after send
+//! B: before lock
+//! A: before write
+//! A: after releasing the lock
 //! A: yield
 //! B: 42
 //! DONE
