@@ -31,7 +31,7 @@ use core::{
     time::Duration,
 };
 
-use async_cortex_m::{task, unsync::Mutex};
+use async_embedded::{task, unsync::Mutex};
 use chrono::{Datelike as _, NaiveDate, NaiveTime};
 use cortex_m_rt::entry;
 use heapless::{consts, String, Vec};

@@ -1,6 +1,6 @@
 [workspace]
 members = [
-  "async-cortex-m",
+  "async-embedded",
   "cortex-m-udf",
   "nrf52",
   "panic-udf",

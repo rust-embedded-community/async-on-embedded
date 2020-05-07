@@ -6,8 +6,6 @@ use core::{
     task::{Context, Poll},
 };
 
-use cortex_m::asm;
-
 use crate::executor;
 
 /// Drives the future `f` to completion
@@ -43,7 +41,7 @@ pub async fn r#yield() {
                 self.yielded = true;
                 // wake ourselves
                 cx.waker().wake_by_ref();
-                asm::sev();
+                unsafe { crate::signal_event_ready(); }
                 Poll::Pending
             }
         }

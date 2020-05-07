@@ -3,7 +3,7 @@
 // Reference: Interface Description Sensirion SCD30 Sensor Module (Version
 // 0.94–D1 –June 2019)
 
-use async_cortex_m::unsync::Mutex;
+use async_embedded::unsync::Mutex;
 
 use crate::twim::{self, Twim};
 

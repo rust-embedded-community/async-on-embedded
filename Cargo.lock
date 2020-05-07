@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "async-cortex-m"
+name = "async-embedded"
 version = "0.0.0-alpha.0"
 dependencies = [
  "cortex-m",
@@ -29,6 +29,7 @@ dependencies = [
  "generic-array 0.13.2",
  "heapless 0.5.3 (git+https://github.com/japaric/heapless?branch=slab)",
  "pin-utils",
+ "riscv",
  "typenum",
 ]
 
@@ -40,12 +41,18 @@ checksum = "f8aac770f1885fd7e387acedd76065302551364496e46b3dd00860b2f8359b9d"
 
 [[package]]
 name = "bare-metal"
-version = "0.2.5"
+version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5deb64efa5bd81e31fcd1938615a6d98c82eafcbcd787162b6f63b91d6bac5b3"
+checksum = "a3caf393d93b2d453e80638d0674597020cef3382ada454faacd43d1a55a735a"
 dependencies = [
  "rustc_version",
 ]
+
+[[package]]
+name = "bit_field"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ed8765909f9009617974ab6b7d332625b320b33c326b1e9321382ef1999b5d56"
 
 [[package]]
 name = "byteorder"
@@ -160,7 +167,7 @@ dependencies = [
 name = "nrf52"
 version = "0.0.0-alpha.0"
 dependencies = [
- "async-cortex-m",
+ "async-embedded",
  "chrono",
  "cortex-m",
  "cortex-m-rt",
@@ -249,6 +256,16 @@ name = "r0"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2a38df5b15c8d5c7e8654189744d8e396bddc18ad48041a500ce52d6948941f"
+
+[[package]]
+name = "riscv"
+version = "0.5.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4a12a859c86dbbcad4eb18daa0465932d907687abfa909c9cc0ca32dc237c8c3"
+dependencies = [
+ "bare-metal",
+ "bit_field",
+]
 
 [[package]]
 name = "rustc_version"

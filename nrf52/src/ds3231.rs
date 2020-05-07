@@ -2,7 +2,7 @@
 
 // Reference: DS3231 datasheet (19-5170; Rev 10; 3/15)
 
-use async_cortex_m::unsync::Mutex;
+use async_embedded::unsync::Mutex;
 use chrono::{Datelike as _, NaiveDate, NaiveDateTime, NaiveTime, Timelike as _};
 
 use crate::twim::{self, Twim};

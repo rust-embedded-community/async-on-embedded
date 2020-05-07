@@ -8,8 +8,6 @@ use core::{
     task::{Context, Poll},
 };
 
-use cortex_m::asm;
-
 use super::waker_set::WakerSet;
 
 /// A mutual exclusion primitive for protecting shared data
@@ -94,7 +92,7 @@ impl<T> Drop for MutexGuard<'_, T> {
     fn drop(&mut self) {
         self.0.locked.set(false);
         self.0.wakers.notify_any();
-        asm::sev();
+        unsafe { crate::signal_event_ready(); }
     }
 }
 

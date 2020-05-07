@@ -16,7 +16,7 @@
 #![no_main]
 #![no_std]
 
-use async_cortex_m::{task, unsync::Channel};
+use async_embedded::{task, unsync::Channel};
 use cortex_m::asm;
 use cortex_m_rt::entry;
 use cortex_m_semihosting::hprintln;
