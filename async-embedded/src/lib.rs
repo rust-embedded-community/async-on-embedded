@@ -94,8 +94,8 @@ pub(crate) unsafe fn signal_event_ready() {
 pub(crate) unsafe fn wait_for_event() {
     if !TASK_READY {
         riscv::asm::wfi();
-        TASK_READY = false;
     }
+    TASK_READY = false;
 }
 
 /// Maximum number of tasks (TODO this could be user configurable)
