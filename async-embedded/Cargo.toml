@@ -7,10 +7,10 @@ publish = false
 version = "0.0.0-alpha.0"
 
 [dependencies]
-generic-array = "0.13.2"
+generic-array = "0.14.2"
 heapless = { git = "https://github.com/japaric/heapless", branch = "slab" }
-pin-utils = "0.1.0-alpha.4"
-typenum = "1.11.2"
+pin-utils = "0.1.0"
+typenum = "1.12.0"
 
 [target.'cfg(target_arch = "arm")'.dependencies]
 cortex-m = "0.6.2"
