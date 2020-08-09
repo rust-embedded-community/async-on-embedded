@@ -73,13 +73,14 @@ pub fn take() -> (Tx, Rx) {
         .compare_exchange_weak(false, true, Ordering::Relaxed, Ordering::Relaxed)
         .is_ok()
     {
-        (            Tx {
+        (
+            Tx {
                 _not_sync: NotSync::new(),
             },
             Rx {
                 _not_sync: NotSync::new(),
             },
-)
+        )
     } else {
         panic!("serial device has already been taken");
     }
