@@ -13,8 +13,7 @@ pin-utils = "0.1.0"
 typenum = "1.12.0"
 
 [target.'cfg(target_arch = "arm")'.dependencies]
-cortex-m = "0.6.2"
-cortex-m-udf = { path = "../cortex-m-udf" }
+cortex-m = "0.6"
 
 [target.'cfg(any(target_arch = "riscv32", target_arch = "riscv64"))'.dependencies]
 riscv = "0.5.6"

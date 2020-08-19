@@ -1,8 +1,0 @@
-[package]
-authors = ["Jorge Aparicio <jorge.aparicio@ferrous-systems.com>"]
-edition = "2018"
-license = "MIT OR Apache-2.0"
-name = "cortex-m-udf"
-publish = false
-version = "0.0.0-alpha.0"
-
