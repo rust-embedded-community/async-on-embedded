@@ -7,4 +7,4 @@ publish = false
 version = "0.0.0-alpha.0"
 
 [dependencies]
-cortex-m-udf = { path = "../cortex-m-udf" }
+cortex-m = "0.6.3"

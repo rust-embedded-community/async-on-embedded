@@ -9,5 +9,5 @@ use core::panic::PanicInfo;
 
 #[panic_handler]
 fn panic(_: &PanicInfo<'_>) -> ! {
-    cortex_m_udf::udf()
+    cortex_m::asm::udf()
 }

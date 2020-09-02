@@ -15,7 +15,7 @@ use cortex_m::asm;
 
 
 #[cfg(target_arch = "arm")]
-pub use cortex_m_udf::udf as abort;
+pub use cortex_m::asm::udf as abort;
 
 #[cfg(target_arch = "arm")]
 #[inline]
