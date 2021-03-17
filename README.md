@@ -4,6 +4,10 @@
 
 **Status:** Proof of Concept. Do not use in production.
 
+***NOTE: [Embassy](https://github.com/embassy-rs/embassy) is a maintained, production executor and library with similar functionality.***
+
+***NOTE: This library contains known bugs.***
+
 ---
 
 Check `nrf52/examples` for an overview of what can be done with the runtime.
